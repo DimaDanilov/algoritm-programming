@@ -60,11 +60,17 @@ def quicksort(array):
 sorttype = 'qsort'
 
 if sorttype == 'bubble':
+    start_time = time.time()
     bubblesort(arr)
+    print("--- %s seconds ---" % (time.time() - start_time))
 elif sorttype == 'insertion':
+    start_time = time.time()
     insertionsort(arr)
+    print("--- %s seconds ---" % (time.time() - start_time))
 elif sorttype == 'selection':
-    selectionsort(arr)    
+    start_time = time.time()
+    selectionsort(arr)
+    print("--- %s seconds ---" % (time.time() - start_time))
 elif sorttype == 'qsort':
     start_time = time.time()
     quicksort(arr)
