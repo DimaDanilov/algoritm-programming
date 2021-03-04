@@ -1,6 +1,6 @@
 import random
 
-max_number = 10
+max_number = 10000000
 random_limit = 999999
 filename = "generatedfiles/"+str(max_number)+".txt"
 

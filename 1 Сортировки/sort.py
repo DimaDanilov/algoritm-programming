@@ -1,4 +1,7 @@
-arr_num = 10 # Выбор файла
+import random
+import time
+
+arr_num = 10000000 # Выбор файла
 filename = "generatedfiles/" + str(arr_num) + ".txt"
 
 # Считывание массива из файла
@@ -7,36 +10,67 @@ arr = (file.read()).split(' ') # Считывание строки и разби
 for i in range(len(arr)): 
     arr[i] = int(arr[i]) # Перевод массива строк в массив чисел
 
+def bubblesort(array):
+    for i in range(len(array)-1):
+        for j in range(len(array)-i-1):
+            if array[j] > array[j+1]:
+                array[j], array[j+1] = array[j+1], array[j]
+
+def insertionsort(array):
+    for i in range(1, len(array)):
+        insert_item = array[i]
+        j = i - 1
+        while j >= 0 and array[j] > insert_item:
+            array[j + 1] = array[j]
+            j -= 1
+        array[j + 1] = insert_item
+
+def selectionsort(array):
+    for i in range(len(array)):
+        minIndex = i
+        for j in range(i + 1, len(array)):
+            if array[j] < array[minIndex]:
+                minIndex = j
+        array[i], array[minIndex] = array[minIndex], array[i]
+
+def quicksort(array):
+    # print('nums =', nums)
+    if len(array) <= 1:
+        return array
+    else:
+        c = random.choice(array)
+        el_smaller = []
+        el_larger = []
+        el_equal = []
+        for i in array:
+            if i < c:
+                el_smaller.append(i)
+            elif i > c:
+                el_larger.append(i)
+            else:
+                el_equal.append(i)
+        answer = quicksort(el_smaller) + el_equal + quicksort(el_larger)
+        return answer
 
 # Тип сортировки
 # bubble - пузырьком
 # insertion - вставками
 # selection - выборкой
-sorttype = 'selection'
+# qsort - быстрая
+sorttype = 'qsort'
 
 if sorttype == 'bubble':
-    # Сортировка пузырьком
-    for i in range(len(arr)-1):
-        for j in range(len(arr)-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
+    bubblesort(arr)
 elif sorttype == 'insertion':
-    # Сортировка вставками
-    for i in range(1, len(arr)):
-        insert_item = arr[i]
-        j = i - 1
-        while j >= 0 and arr[j] > insert_item:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = insert_item
+    insertionsort(arr)
 elif sorttype == 'selection':
-    # Сортировка выборкой
-    for i in range(len(arr)):
-        minIndex = i
-        for j in range(i + 1, len(arr)):
-            if arr[j] < arr[minIndex]:
-                minIndex = j
-        arr[i], arr[minIndex] = arr[minIndex], arr[i]
+    selectionsort(arr)    
+elif sorttype == 'qsort':
+    start_time = time.time()
+    quicksort(arr)
+    print("--- %s seconds ---" % (time.time() - start_time))
+    arr = quicksort(arr)
+
 
 
 # Запись в файл
