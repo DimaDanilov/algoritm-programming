@@ -52,12 +52,47 @@ def quicksort(array):
         answer = quicksort(el_smaller) + el_equal + quicksort(el_larger)
         return answer
 
+def mergeSort(arr):
+    if len(arr) > 1:
+ 
+        mid = len(arr)//2
+        left = arr[:mid]
+        right = arr[mid:]
+ 
+        mergeSort(left)
+        mergeSort(right)
+ 
+        i = 0
+        j = 0
+        k = 0
+ 
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                arr[k] = left[i]
+                i += 1
+            else:
+                arr[k] = right[j]
+                j += 1
+            k += 1
+
+        while i < len(left):
+            arr[k] = left[i]
+            i += 1
+            k += 1
+ 
+        while j < len(right):
+            arr[k] = right[j]
+            j += 1
+            k += 1
+ 
+
 # Тип сортировки
 # bubble - пузырьком
 # insertion - вставками
 # selection - выборкой
 # qsort - быстрая
-sorttype = 'qsort'
+# merge - слиянием
+sorttype = 'merge'
 
 if sorttype == 'bubble':
     start_time = time.time()
@@ -76,7 +111,10 @@ elif sorttype == 'qsort':
     quicksort(arr)
     print("--- %s seconds ---" % (time.time() - start_time))
     arr = quicksort(arr)
-
+elif sorttype == 'merge':
+    start_time = time.time()
+    mergeSort(arr)
+    print("--- %s seconds ---" % (time.time() - start_time))
 
 
 # Запись в файл
