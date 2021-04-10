@@ -84,7 +84,34 @@ def mergeSort(arr):
             arr[k] = right[j]
             j += 1
             k += 1
+
+
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
  
+    if l < n and arr[largest] < arr[l]:
+        largest = l
+ 
+    if r < n and arr[largest] < arr[r]:
+        largest = r
+ 
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]  # swap
+
+        heapify(arr, n, largest)
+ 
+def heapSort(arr):
+    n = len(arr)
+
+    for i in range(n//2 - 1, -1, -1):
+        heapify(arr, n, i)
+
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
 
 # Тип сортировки
 # bubble - пузырьком
@@ -92,7 +119,8 @@ def mergeSort(arr):
 # selection - выборкой
 # qsort - быстрая
 # merge - слиянием
-sorttype = 'merge'
+# heapsort - пирамидальная
+sorttype = 'heapsort'
 
 if sorttype == 'bubble':
     start_time = time.time()
@@ -114,6 +142,10 @@ elif sorttype == 'qsort':
 elif sorttype == 'merge':
     start_time = time.time()
     mergeSort(arr)
+    print("--- %s seconds ---" % (time.time() - start_time))
+elif sorttype == 'heapsort':
+    start_time = time.time()
+    heapSort(arr)
     print("--- %s seconds ---" % (time.time() - start_time))
 
 
