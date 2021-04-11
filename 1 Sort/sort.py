@@ -1,7 +1,7 @@
 import random
 import time
 
-arr_num = 10000000 # Выбор файла
+arr_num = 1000 # Выбор файла
 filename = "generatedfiles/" + str(arr_num) + ".txt"
 
 # Считывание массива из файла
@@ -98,7 +98,7 @@ def heapify(arr, n, i):
         largest = r
  
     if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]  # swap
+        arr[i], arr[largest] = arr[largest], arr[i]
 
         heapify(arr, n, largest)
  
